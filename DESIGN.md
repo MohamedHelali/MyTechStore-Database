@@ -99,7 +99,7 @@ this section we will further explain the tables and their relationships.
 	* **price**: A decimal value indicating the part's price.
 	* **stock_quantity**: An integer indicating the current stock of the part.
 
-[!IMPORTANT]  
+> [!IMPORTANT]  
 > When inserting a new part into the **parts** table:
 > * **stock_quantity** must not be left empty and should be set to a value greater than 0.
 
@@ -123,7 +123,7 @@ this section we will further explain the tables and their relationships.
 	* **hire_date**: A timestamp indicating the technician's hire date.
 	* **deleted**: A Boolean flag for **soft deletion**, indicating whether the technician's record is marked as deleted.
 
-[!IMPORTANT]  
+> [!IMPORTANT]  
 > To maintain **data standardization** across the database and prevent potential **inconsistencies**, the **status** column in the **technicians** table only accepts one of the following predefined values: **Available** or **On_leave**.
 
 * **repair_requests**: This table stores information about **repair_requests** submitted by the customers to fix their damaged products. It consists of 11 columns:
@@ -142,10 +142,10 @@ this section we will further explain the tables and their relationships.
 *  **repair_date**: A timestamp indicating the exact date when the repair was completed.
 * **deleted**: A Boolean flag for **soft deletion**, indicating whether the repair_request's has been logically removed.
 
-[!IMPORTANT]  
+> [!IMPORTANT]  
 > Due to limited scope of the project, repair requests are restricted to products sold by the shop. This decision helps simplify the database management, particularly in areas such as spare parts inventory management.
 
-[!NOTE]
+> [!NOTE]
 > To maintain **data standardization** and prevent **inconsistencies**, the **status** column in the **repair_requests** table only accepts the following predefined values: **Pending**, **In_progress** or **Completed**.
 
 * **repair_parts**: This junction table links the **repair_requests** and **parts** tables, it allows us to track the **spare parts** used in repairing a device associated with repair request. this table consist of 4 columns:
@@ -154,7 +154,7 @@ this section we will further explain the tables and their relationships.
 	* **part_id**: A foreign key referencing the **parts** indicating the specifc part used during the repair.
 	* **quantity**: An integer representing the number of units of a specific part used in a repair.
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > When adding a new record to the **repair_parts** table, the **quantity** column value **must be strictly greater than zero** to ensure valid tracking of spare parts usage.
 
 * **warranty_claim**: This table stores information about **warranty claims** initiated by the customers for products purchased from the store. It consists of 8 columns:
@@ -193,7 +193,7 @@ this section we will further explain the tables and their relationships.
 		* **Repair**: The part was used to repair a device, reducing the stock of a the part.
 		* **Restock**:  New units were added to the part's current stock.
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > The **product_inventory_log** and **part_inventory_log** tables are automatically populated by the database using custom **triggers**. These triggers track and log changes affecting the stock levels of both **products** and **parts**, simplifying inventory management and ensuring accurate record-keeping.
 
 ### Database relationships
@@ -701,7 +701,7 @@ This trigger prevents deleting a customer if they have **active transactions** r
 **Benefits**:
 * Prevents any accidental deletion of clients with active transactions, which could break references in the database.
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Instead of permanently deleting records, the system employs the **Soft Deletion Approach**, a technique where records are not **physically removed** from the databse but are instead **flagged as deleted** (e.g., using a **deleted** column). 
 > This method enables administrators to prevents any **accidental** or **unauthorized deletions** by providing them a simple way to recover deleted records when needed.
 
