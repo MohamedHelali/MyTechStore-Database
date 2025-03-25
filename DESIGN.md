@@ -305,9 +305,11 @@ This view is particularly useful for:
 * Quickly retrieving key customer metrics without running complex queries on raw tables.
 
 **3. detailed_sales**
+
 The **detailed_sales** view provides a comprehensive breakdown of sales transactions including customer details, product information and purchase details. This view make it easier to analyze sales data without the need to join multiple tables manually.
 
 **Structure and Purpose**
+
 This view combines data from **products**, **customers**, **types**, **brands**, and **sales** to presents a detailed insights into each sale transaction. It includes:
 * **customer_id**: The unique identifier of the customer.
 * **full_name**: The full name of the customer (concatinated from the **first_name** and **last_name** retrieved from the **customers** table).
@@ -318,15 +320,18 @@ This view combines data from **products**, **customers**, **types**, **brands**,
 * **sale_date**: The date when the sale was made.
 
 **Use Case**
+
 This view can be useful for:
 * Tracking **sales trands** based on product types and brands.
 * Providing sales representatives with customer purchase history for better customer relationship management.
 * Reducing the need for complex queries when analyzing **transaction-level sales data**.
 
 **4. open_repair_requests**
+
 The **open_repair_request** view provides a list of repair request that are still **pending** or **in progress**. This view helps track active repair requests and simplifies the process of monitoring ongoing repairs.
 
 **Structure and Porpuse**
+
 The view retrieves data from the **repair_requests**, **customers**, and **products** to present key information about the open repair requests. It includes:
 * **repair_id**: The unique identifier for the repair request.
 * **customer_name**: The full name of the customer who submitted the repair request.
@@ -336,6 +341,7 @@ The view retrieves data from the **repair_requests**, **customers**, and **produ
 * **status**: the current status of the repair request (**Pending** or **In_progress**).
 
 **Use Case**
+
 This view can be useful for:
 * **tracking open repair request** to ensure **timely** processing.
 * **Improving customer service** by quickly identifying pending and in-progress repairs.
@@ -343,9 +349,11 @@ This view can be useful for:
 * **Reducing query complexity** by filtering only relevent repair requests.
 
 **5. open_warranty_claims**
+
 The **open_warranty_claims** view provides a list of **pending warranty claims** submitted by customers. The view helps track unsolved warranty claims, ensuring timely processing and better customer support.
 
 **Structure and Purpose**
+
 Theis view retrieves data from the **warranty_claims**, **customers**, and **products** to display key details about active warranty claims. It includes:
 * **claim_id**: The unique identifier of the warranty claim.
 * **customer_id**: the unique identifier of the customer who submitted the claim.
@@ -355,21 +363,25 @@ Theis view retrieves data from the **warranty_claims**, **customers**, and **pro
 * **claim_date**: the date when the warranty claim was submitted.
 
 **Use Case**
+
 This view is useful for:
 * **Tracking active warranty claim** to ensure timely resolution.
 * Providing customer support seervice with easy access to the pending claims.
 * Reducing the query complexity by filtering warranty data (filtering out the processed warranty claims).
 
 **6. technician_workload**
+
 The **technician_workload** view provides an overview of each technician's **current repair workload**. It helps track the number of active repair requests assigned to each technician, ensuring balanced task distribution and efficient resource management.
 
 **Structure and Purpose**
+
 This view retrieves data from the **technicians** and **repair_requests** tables to display key workload metrics for each technician. It includes:
 * **technician_id**: The unique identifier of the technician.
 * **technician_name**: The full name of the technician.
 * **active_repairs**: the toal number of **active repair requests** assigned to the technician.
 
 **Use Case**
+
 This view can be useful for:
 * **Monitoring technician workload** to ensure fair task distribution.
 * **identifying overburned technicians** and reallocating tasks accordingly.
@@ -377,9 +389,11 @@ This view can be useful for:
 * **Generating reports** on technician performance and workload trends.
 
 **7. low_stock_products**
-  The **low_stock_products** view provides a **real-time** overview of the products that are **running low** on stock. This helps the store managers identify which products that need to be **restocked** to avoid shortages and maintain availability.
+
+The **low_stock_products** view provides a **real-time** overview of the products that are **running low** on stock. This helps the store managers identify which products that need to be **restocked** to avoid shortages and maintain availability.
 
 **Structure and Purpose**
+
 This view retrieves data from **products**, **types**, **brands**, **product_suppliers**, and **suppliers** to display details about low stock products. It includes:
 * **id**: The unique identifier for the product.
 * **brand**: The brand name of the product.
@@ -390,6 +404,7 @@ This view retrieves data from **products**, **types**, **brands**, **product_sup
 * **stock_quantity**: The current available stock of the product (less than 10 units).
 
 **Use Case**
+
 This view can be useful for:
 * **Monitoring inventory levels** and detecting products with low stock.
 * Helping store manager identify products that need to be restocked.
@@ -397,9 +412,11 @@ This view can be useful for:
 * **Preventing shortages** and ensuring product availability for customers.
 
 **8. available_parts**
+
 The **available_parts** view provides a real time list of spare parts that are currently in stock. It helps store managers and technicians quickly identify which parts are available for **sale** or **repair services**, improving inventory management and customer service.
 
 **Structure and Purpose**
+
 This view is built by joining the **parts**, **types**, and **brands** tables to provide more detailed dataset. It includes:
 * **id**: The unique identifier of the part.
 * **brand**: The brand name of the part.
@@ -408,16 +425,19 @@ This view is built by joining the **parts**, **types**, and **brands** tables to
 * **stock_quantity**: The number of available units in stock.
 
 **Use Case**
+
 This view can be useful for:
 * Ensuring **smooth repair operations** by checking part availability.
 * **Optimiziing inventory management** by tracking available spare parts.
 * Generating report on spare parts availability for better stock planning.
 
 **9. low_stock_parts**
+
 The **low_stock_parts** views helps store managers identify spare parts that are **running low** in stock.
 This ensures timely restocking and prevents shortages that could disrupt repair operations.
 
 **Structure and Purpose**
+
 This view retrives data from the **parts**, **brands**, **types**, **part_suppliers**, and **suppliers** to provide an overview on parts with low inventory levels. it includes:
 * **id**: The unique identifier of the part.
 * **brand**: The brand of the part.
@@ -427,15 +447,18 @@ This view retrives data from the **parts**, **brands**, **types**, **part_suppli
 * **stock_quantity**: The number of available units in stock.
 
 **Use Case**
+
 This view can be useful for:
 * **Proactive inventory management** by identifying parts that need replenishment.
 * **Reducing downtime** in repair services by ensure spare parts are available.
 * **Improving customer satisfaction** by preventing out-of-stock situations.
 
 **10. most_sold_brands**
+
 The **most_sold_brands** view provides an overview of the **most popular brands** based on **sales performance**. It helps business owners, managers, and analysts identify which brands are generating the **highest revenue and sales volume**.
 
 **Structure and Purpose**
+
 This view aggregate sales data from the **sales**, **products**, and **brands** tables to display:
 * **id**: The unique identifier of the brand.
 * **brand_name**: The name of the brand.
@@ -443,15 +466,18 @@ This view aggregate sales data from the **sales**, **products**, and **brands** 
 * **total_amount**: The total revenue generated by products from this brand.
 
 **Use Case**
+
 * Identifying **top-performing** brands in terms of revenue and sales volume.
 * Helping store managers prioritize which brands to stock more of based on customer demand.
 * **Supporting marketing strategies** that focuses on promoting high-selling brands.
 * **Providing insights for suppliers** on the most popular brands.
 
 **11. most_used_parts**
- The **most_used_parts** view provides an overview of the **most frequently used** spare parts in reapirs. This information is essential for **inventory management**, helping the store **track demand** for replacement parts and **optimize stock levels**.
+
+The **most_used_parts** view provides an overview of the **most frequently used** spare parts in reapirs. This information is essential for **inventory management**, helping the store **track demand** for replacement parts and **optimize stock levels**.
 
 **Structure and Purpose**
+
 This view aggregate data from the **parts**, **brands**, and **repair_parts** tables to display:
 * **id**: The unique identifier of the part.
 * **brand_name**: The brand associated with the part.
@@ -459,6 +485,7 @@ This view aggregate data from the **parts**, **brands**, and **repair_parts** ta
 * **number_of_usage**: The total number of times this part has been used in repairs.
 
 **Use Case**
+
 This view is useful for:
 * Identifying **high-demand** spare parts, allowing the store to maintain **optimal stock levels**.
 * Improving repair service efficiency by reducing delay caused by out-of-stock parts.
@@ -468,28 +495,52 @@ This view is useful for:
 In this section we will provide an overview of the various indexes that was implemented in the database. The primary purpose of these indexes is to **optimize query performance**, allowing the database to **locate and fatch data more efficiently**, reducing the need for full table scans and improving the overall speed of operations, especially in **large datasets**. Below  is a breakdown of the indexes used and their purpose:
 
 **1. products_index (type_id, brand_id)**
-* **Purpose**: Improves the efficiency of queries that filter or join on **type_id** and **brand_id**, such as fetching products by **category** and **brand**.
-* **benefit**: Prevents full table scans when searching for products of specific type and brand.
+
+* **Purpose**: 
+Improves the efficiency of queries that filter or join on **type_id** and **brand_id**, such as fetching products by **category** and **brand**.
+
+* **benefit**: 
+Prevents full table scans when searching for products of specific type and brand.
 
 **2. parts_index (type_id, brand_id)**
-* **Purpose**: Similar to **products_index**, this index optimizes queries that filter parts based on their **type** and **brand**.
-* **Benefit**: Improves part lookup speeds when filtering by type and brand.
+
+* **Purpose**: 
+Similar to **products_index**, this index optimizes queries that filter parts based on their **type** and **brand**.
+
+* **Benefit**: 
+Improves part lookup speeds when filtering by type and brand.
 
 **3. repair_request_index (customer_id , status)**
-* **Purpose**: Speeds up queries retrieving repair requests by customer or request status (e.g., **Pending**, **In_Progress**).
-* **Benefit**: reduces lookup time for repair requests based on customer and request status.
+
+* **Purpose**: 
+Speeds up queries retrieving repair requests by customer or request status (e.g., **Pending**, **In_Progress**).
+
+* **Benefit**: 
+reduces lookup time for repair requests based on customer and request status.
 
 **4. warranty_claims_index (product_id, customer_id, status)**
-* **Purpose**: Enhances performance when searching for warranty claims by **product**, **customer**, or **status**.
-* **Benefit**:  Makes it faster to find warranty claims related to specific product and customer.
+
+* **Purpose**: 
+Enhances performance when searching for warranty claims by **product**, **customer**, or **status**.
+
+* **Benefit**:  
+Makes it faster to find warranty claims related to specific product and customer.
 
 **5. technicians_index (status)**
-* **Purpose**: Optimizes queries that filter technicians based on their current status (e.g., **Available**,**On_leave**).
-* **Benefit**: Reduces search time when filtering technicians by status.
+
+* **Purpose**: 
+Optimizes queries that filter technicians based on their current status (e.g., **Available**,**On_leave**).
+
+* **Benefit**: 
+Reduces search time when filtering technicians by status.
 
 **6. sales_index (customer_id, product_id)**
-* **Purpose**: Improves queries that retrieve sales records based on customer purchases or specific product sales.
-* **Benefit**: Enhances performance when analyzing customer purchase history and product sales trends.
+
+* **Purpose**: 
+Improves queries that retrieve sales records based on customer purchases or specific product sales.
+
+* **Benefit**: 
+Enhances performance when analyzing customer purchase history and product sales trends.
 
 ### Database triggers
 In this section we will focus on the triggers implemented in the databse. A trigger is a special type of stored procedure that automatically executes in response to certain events on designated tables. These triggers help database administrators enforce business rules, maintain data integrity, and automate essential tasks without requiring manual intervention.
