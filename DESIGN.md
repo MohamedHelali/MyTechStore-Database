@@ -609,7 +609,7 @@ This trigger ensures that the stock of spare parts is updated automatically when
 * Improves repair tracking by ensuring real-time updates on available parts.
 * Prevents manual stock adjustments by handling it automatically.
 
-**7.after_part_insert**
+**7. after_part_insert**
 
 **Purpose**
 This trigger log new part entries into the **part_inventory_log** table, keeping track of stock additions when a part is first inserted to the **parts** table.
@@ -625,7 +625,7 @@ This trigger log new part entries into the **part_inventory_log** table, keeping
 * Enhance inventory management by maintaining a detailed history of stock changes.
 * Supports business insights by providing data on parts additions.
 
-**8.after_part_update**
+**8. after_part_update**
 
 **Purpose**
 This trigger log inventory updates inside the **part_inventory_log** whenever a part's stock quantity is modified in the **parts** table.
@@ -644,7 +644,7 @@ This trigger log inventory updates inside the **part_inventory_log** whenever a 
 * Improves inventory tracking by automatically recording stock updates.
 * Ensures accuracy in inventory management by distinguishing between Repairs and restocks.
 
-**9.after_repair_complete**
+**9. after_repair_complete**
 
 **Purpose**
 This trigger ensure that a repair can only marked as **Completed** if it was previously set **In_progress** and records the repair comppletion date.
@@ -663,7 +663,7 @@ This trigger ensure that a repair can only marked as **Completed** if it was pre
 * Ensures accurate Timestamps by automatically recording the repair completion date.
 * Prevents errors by avoiding marking unfinished repairs as completed.
 
-**10.repair_request_in_progress**
+**10. repair_request_in_progress**
 
 **Purpose**:
 This trigger updates the status of a repair request to "In Progress" when a technician is assigned to it.
@@ -681,7 +681,7 @@ This trigger updates the status of a repair request to "In Progress" when a tech
 	* **Prevents errors**: avoid an potential inconsistencies where a technician is assigned by the repair request remains **Pending**.
 	* **Better tracking**: help managers better monitor open repair requests and technician workload.
 
-**11.before_customer_delete**
+**11. before_customer_delete**
 
 **Purpose**:
 This trigger prevents deleting a customer if they have **active transactions** related to **sales**, **warranty claims**, and **repair requests**. Instead of permently deleting the record, the system uses a **soft delete approach** by updating the **deleted** field.
@@ -705,7 +705,7 @@ This trigger prevents deleting a customer if they have **active transactions** r
 > Instead of permanently deleting records, the system employs the **Soft Deletion Approach**, a technique where records are not **physically removed** from the databse but are instead **flagged as deleted** (e.g., using a **deleted** column). 
 > This method enables administrators to prevents any **accidental** or **unauthorized deletions** by providing them a simple way to recover deleted records when needed.
 
-**12.before_technician_assign_to_repair_request**
+**12. before_technician_assign_to_repair_request**
 
 **Purpose**:
 This trigger check the status of the a technician before assigning him/her to a handle a repair request. This main objective of this trigger is to ensure that only **Active** technicians can be assigned to repair requests.
@@ -718,7 +718,7 @@ This trigger check the status of the a technician before assigning him/her to a 
 **Benefits**:
 * This trigger helps ensure work efficiency by ensuring **only available** technicians are assign to the repair tasks. 
 
-**13.before_warranty_claim_insert**
+**13. before_warranty_claim_insert**
 
 **Purpose**:
 This trigger ensures that customers can only submit a warranty claim for products  that are still within their warranty period.
@@ -733,7 +733,7 @@ This trigger ensures that customers can only submit a warranty claim for product
 **Benefits**:
 * By using this trigger, the database ensures that only **valid** warranty caims are accepted, preventing **unauthorized** or **expired** claims.
 
-**14.close_warranty_claim**
+**14. close_warranty_claim**
 
 **Purpose**
 This trigger ensures that when a warranty claim is updated with a resolution, its status is automatically adjusted based on the outcome.
@@ -753,7 +753,7 @@ In this section, we will focus on the **Stored Procedues** implemented in this p
 this project includes a total of **24 stored procedures**, each designed to enhance database performance by reducing execution time and improving security by allowing users to interact with these procedures instead of directly accessing databse tables which can **greatly reduce** the risk of **SQL injection**. 
 Below is a breakdown of the implemented procedures and thier respective purposes:
 
-**1.addProduct**
+**1. addProduct**
 
 **Description**:
 The procedure is used to add new product into the **products** table while enforcing a stock quantity validation. It ensures that no product can be added with zero stock to the database, preventing any potential inconsistencies in inventory management. 
@@ -790,7 +790,7 @@ To add a new product using this procedure, execute:
 * This procedure Reuces **Manual SQL writing** by wrapping the insert logic into a reusable procedure.
 * Improves **database security** by preventing direct table manipulations.
 
-**2.deleteProduct**
+**2. deleteProduct**
 
 **Description**
 This procedure is used to **soft delete** a product from the **products** table. Instead of permanently removing the product record, it sets the **deleted** column to 1, indicating that the product is no longer available.
@@ -808,7 +808,7 @@ This procedure is used to **soft delete** a product from the **products** table.
 * Ensures **data consistency** by preventing accidental or unauthorized data loss tha could lead to broken references in related tables.
 * Supports data recovery since the deleted product can be restored by updating the **deleted** flag to 0.
 
-**3.addProductStock**
+**3. addProductStock**
 
 **Description**
 The procedure is designed to **increase the stock quantity** of an existsing product inside the **products** table. The main objective of this procedure is to update the current inventory levels when new stocks is received.
@@ -834,7 +834,7 @@ To add 50 units to the stock of the product with ID 3:
 * The validation step prevents unintended updates to non-existent products.
 * Provides clear feedback if the specified product is not found, reducing the risk of data errors.
 
-**4.addCustomer**
+**4. addCustomer**
 
 **Description**
 This procedure is used to add new customers to the **customers** table. It simplifies the process of the customer registration and ensures that customer data are correctly inserted into the database.
@@ -852,14 +852,14 @@ This procedure is used to add new customers to the **customers** table. It simpl
 
 **Usage Example**
 To add new customer:
-`CALL addCustomer('John', 'Doe', 'john.doe@example.com', '+1234567890', '123 Main St');
-`
+`CALL addCustomer('John', 'Doe', 'john.doe@example.com', '+1234567890', '123 Main St');`
+
 **Benefits**
 * Simplifies the customer registration process by combining complex SQL queries into a single procedure call.
 * This procedure can be used is various application modules where customer registration is required.
 * This procedure ensure **consistent data entry** into the **customers** table.
 
-**5.deleteCustomer**
+**5. deleteCustomer**
 
 **Description**
 This procedure is used to **soft delete** a customer from the **customers** table. Instead of permanently removing the customer record, it sets the **deleted** column to 1, indicating that the customer is no longer available.
@@ -878,7 +878,7 @@ To soft-delete a customer with the ID 5:
 * Ensures **data consistency** by preventing accidental or unauthorized data loss tha could lead to broken references in related tables.
 * Supports data recovery since the deleted customer can be restored by updating the **deleted** flag to 0.
 
-**6.addSale**
+**6. addSale**
 
 **Description**
 This stored procedure is used to register a new sale in the **sales** table. It performs a set of pre-defined validations to ensure data integrity, calculate the total amount of the sale.
@@ -915,7 +915,7 @@ To register a sale of 5 unit of the product with the ID of 2 to a customer with 
 * Ensures that all referenced customers and products exists, maintaining consistency.
 * Automates the sales registration process, reducing errors.
 
-**7.addSupplier**
+**7. addSupplier**
 
 **Description**
 This procedure is used to add new parts/products supplier to the **suppliers** table. It simplifies the process of the supplier registration and ensures that supplier data are correctly inserted into the database.
@@ -940,7 +940,7 @@ To add a new supplier to the **suppliers** table:
 * This procedure can be used is various application modules where supplier registration is required.
 * This procedure ensure **consistent data entry** into the **suppliers** table.
 
-**8.deleteSupplier**
+**8. deleteSupplier**
 
 **Description**
 This procedure is used to **soft delete** a part/product supplier from the **suppliers** table. Instead of permanently removing the supplier record, it sets the **deleted** column to 1, indicating that the supplier is no longer available.
@@ -959,7 +959,7 @@ To soft-delete a supplier with the ID 3:
 * Ensures **data consistency** by preventing accidental or unauthorized data loss tha could lead to broken references in related tables.
 * Supports data recovery since the deleted supplier can be restored by updating the **deleted** flag to 0.
 
-**9.setProductSupplier**
+**9. setProductSupplier**
 
 **Description**
 This procedure is used to **associate a product with a corresponding supplier** by adding a record to the **product_suppliers** table. This association also include setting a **supply price** for the product, Ensuring better inventory management.
@@ -993,10 +993,10 @@ To Assign a product with the ID **5** to a supplier with ID **2** and set the su
 This procedure is used to add a **new part** to the **parts** table. This procedure essure that the part details are properly recorded in the database. This procedure is crucial because it only allows valid parts with positive stock quantity to be added to the database.
 
 **Parameters**
-* **part_name** (VARCHAR(32): The name of the part to be added.
+* **part_name** (VARCHAR(32)): The name of the part to be added.
 * **part_brand** (INT UNSIGNED): The ID of the part referencing the **brands** table.
 * **part_type** (INT UNSIGNED): The ID of the part's category/type referencing the **types** table.
-* **part_price** (DECIMAL(10,2): The price of the part.
+* **part_price** (DECIMAL(10,2)): The price of the part.
 * **part_stock** (INT UNSIGNED): The initial stock quantity of the part.
 
 **Functionality**
@@ -1016,7 +1016,7 @@ This procedure is used to add a **new part** to the **parts** table. This proced
 * Simplifies the process of adding new parts while maintaining consistent data.
 * Reduces the risk of invalid data entry by validating inputs.
 
-**11.deletePart**
+**11. deletePart**
 
 **Description**
 This procedure is used to **soft delete** a part from the **parts** table. Instead of permanently removing the part record, it sets the **deleted** column to 1, indicating that the part is no longer available.
@@ -1035,7 +1035,7 @@ To soft-delete a part with the ID 3:
 * Ensures **data consistency** by preventing accidental or unauthorized data loss tha could lead to broken references in related tables.
 * Supports data recovery since the deleted part can be restored by updating the **deleted** flag to 0.
 
-**12.addPartStock**
+**12. addPartStock**
 
 **Description**
 The procedure is designed to **increase the stock quantity** of an existsing part inside the **parts** table. The main objective of this procedure is to update the current inventory levels when new stocks is received.
@@ -1061,7 +1061,7 @@ To add 50 units to the stock of the part with ID 4:
 * The validation step prevents unintended updates to non-existent parts.
 * Provides clear feedback if the specified part is not found, reducing the risk of data errors.
 
-**13.setPartSupplier**
+**13. setPartSupplier**
 
 **Description**
 This procedure is used to **associate a part with a corresponding supplier** by adding a record to the **part_suppliers** table. This association also include setting a **supply price** for the part, Ensuring better inventory management.
@@ -1089,7 +1089,7 @@ To Assign a part with the ID **4** to a supplier with ID **2** and set the suppl
 * Streamlines the process of associating parts with suppliers.
 * Ensures that only valid parts and suppliers are linked.
 
-**14.setPartCompatibility**
+**14. setPartCompatibility**
 
 **Description**
 This procedure is used to **define compatibility** between a part and a product in the system. By linking parts to products, it helps managers maintain accurate records of which parts are compatible with which products.
@@ -1116,7 +1116,7 @@ To associate a part with ID 5 as compatible with a product of the ID 10:
 * Ensures that only valid parts and products are linked, preventing invalid references.
 * Facilitates future compatibility expansion as new parts and products are added.
 
-**15.addTechnician**
+**15. addTechnician**
 
 **Description**
 This procedure is designed to **add a new technician** to the **technicians** table. This procedure helps streamline the process of expanding the repair teams who handle repair requests and other technical tasks.
@@ -1137,7 +1137,7 @@ To add a new technician with the name "**John Doe**" with the email "jhon.doe@ex
 * Ensures that technicians are added uniformly to the database.
 * Minimizes the risk of inconsistent data entry due to manual typing.
 
-**16.deleteTechnician**
+**16. deleteTechnician**
 
 **Description**
 This procedure is used to **soft delete** a technician from the **technicians** table. Instead of permanently removing the technician record, it sets the **deleted** column to 1, indicating that the technician is no longer available.
@@ -1156,7 +1156,7 @@ To soft-delete a technician with the ID 3:
 * Ensures **data consistency** by preventing accidental or unauthorized data loss tha could lead to broken references in related tables.
 * Supports data recovery since the deleted technician can be restored by updating the **deleted** flag to 0.
 
-**17.setTechnicianStatus**
+**17. setTechnicianStatus**
 
 **Description**
 This procedure is used to update the **status** of a technician in the **technicians** table. The main objective of this procedure is to ensure that the availability of technicians are correctly tracked by managers, which allow optimal assignments of repair requests.
@@ -1183,7 +1183,7 @@ This procedure is used to update the **status** of a technician in the **technic
 * Prevents **invalid status entries** by restricting status update to predefined values.
 * **Reduces manual updates**, making the system more efficient and less error-prone. 
 
-**18.addRepairRequest**
+**18. addRepairRequest**
 
 **Description**
 This procedure is used to create a **new repair request** for a product owned by a customer. This ensures that only valid customers and product are allowed to submit repair requests.
@@ -1213,7 +1213,7 @@ To create a new repair request:
 * Minimizes the risk of inconsistent data entry due to manual typing.
 * Prevents invalid repair requests that could reference nonexistent products or customers.
 
-**19.assignTechnician**
+**19. assignTechnician**
 
 **Description**
 This procedure is used to **assign a technician to a repair request**. It ensures that only **Active** technicians are assigned to **pending** repair requests.
@@ -1252,7 +1252,7 @@ To assign technician with the ID **5** to the repair request withe the ID **12**
 * Maintain effective workflow by allowing only **Pending** requests to be assigned.
 * Maintain data consistency by ensuring that only **Active** technicians can be assigned.
 
-**20.calculaterepairCost**
+**20. calculaterepairCost**
 
 **Description**
 This procedure is used to calculate the **total cost of a repair request**, by summing the cost of all parts used in the repair.
@@ -1280,7 +1280,7 @@ SELECT @repair_cost;
 **Benefits**
 * Automates the cost calculation, reducing manual effort.
 
-**21.completeRepairRequest**
+**21. completeRepairRequest**
 
 **Description**
 This procedure is used to mark a repair request as **completed** and updating its **total cost**. It ensures that only repair request with **In_progress** status can be marked as completed.
@@ -1312,7 +1312,7 @@ To mark a repair request with the ID 15 as completed, use the following SQL comm
 * Automate cost calculation, reducing manual input.
 * Maintain data integrity by preventing invalid status updates.
 
-**22.addWarrantyClaim**
+**22. addWarrantyClaim**
 
 **Description**
 This procedure allows customers to submit a claim for a product they have purchased. It ensures that the claim is linked to a valid sale record, preventing unvalid claims.
@@ -1340,7 +1340,7 @@ To create a **warranty claim** for a sale with **ID 10**, reporting a defective 
 * Ensure that  stored warranty claims are valid by linking them to existing sales records.
 * Automate warranty claims processing, by reducing manual checks.
 
-**23.approveWarrantyClaim**
+**23. approveWarrantyClaim**
 
 **Description**
 This procedure is used to mark a warranty claim as **Completed** by specifying whether the resolution will be a **Repair** or a **Replacement**.It ensures that only **valid** and **Pending** warranty claims are processed.
@@ -1373,7 +1373,7 @@ To approve a **warranty claim with ID 10** and resolve it via **Repair**, use:
 * Ensures only pending claims are processed, preventing duplicate handling.  
 * Automates the approval workflow, reducing manual intervention.
 
-**24.denyWarrantyClaim**
+**24. denyWarrantyClaim**
 
 **Description**
 This procedure is used to mark a warranty claim as **Denied**. It ensures that only **valid** and **Pending** warranty claims are processed.
