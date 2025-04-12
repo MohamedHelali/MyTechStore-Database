@@ -200,7 +200,7 @@ this section we will further explain the tables and their relationships.
 In this section we will further explain the different relations between the various table inside our database.
 To better understand the database, the following image contains an **entity-relationship** diagram (Also known as ER-diagram) detailing the relationships between the differents tables inside the database:
 
-![Entity-relationship diagram!](https://github.com/user-attachments/assets/67090c34-6e84-4409-a6fb-bdf98cff471b "Entity-relationship diagram")
+![Entity-relationship diagram!](https://github.com/user-attachments/assets/04da572d-d506-4f7f-a632-3cdaf919a1f7 "Entity-relationship diagram")
 
 **1. Product & Inventory Relationships**
 * **Products** ---> **types **(Many-to-One)
@@ -225,6 +225,12 @@ To better understand the database, the following image contains an **entity-rela
 	* A customer can request **multiple repairs** for differents products.
 * **customers** ---> **warranty_claims** (One-to-Many)
 	* A customer can file **multiple warranty claims**.
+* **repair_requests** ---> **products** (Many-to-one)
+ 	* Each repair request is associated with a single product
+   	* However, a single product can have multiple repair requests over time.
+* **warranty_claims** ---> **products** (Many-to-one)
+ 	* Each warranty claim is associated with a single product
+   	* However, a single product can have multiple warranty claims over time.
 * **technicians** ---> **repair_requests** (One-to-Many)
 	* Each repair request is handled by **one** technician.
 
