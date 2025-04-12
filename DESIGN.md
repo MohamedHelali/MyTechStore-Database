@@ -200,7 +200,7 @@ this section we will further explain the tables and their relationships.
 In this section we will further explain the different relations between the various table inside our database.
 To better understand the database, the following image contains an **entity-relationship** diagram (Also known as ER-diagram) detailing the relationships between the differents tables inside the database:
 
-![Entity-relationship diagram!](https://github.com/user-attachments/assets/047d42c1-bd57-4fd6-b7f2-132cbc51d466 "Entity-relationship diagram")
+![Entity-relationship diagram!](https://github.com/user-attachments/assets/67090c34-6e84-4409-a6fb-bdf98cff471b "Entity-relationship diagram")
 
 **1. Product & Inventory Relationships**
 * **Products** ---> **types **(Many-to-One)
