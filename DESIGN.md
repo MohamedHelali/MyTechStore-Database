@@ -1,6 +1,6 @@
 #  MyTechStore Database
 
-####  Video Demo:
+####  Video Demo: https://youtu.be/sGgBs7LWxGI
 
 ## About the project
 
